@@ -1,24 +1,29 @@
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
 import NotificationButton from "../NotificationButton";
 import "./styles.css";
 
 function SalesCard() {
+  const [startDate, setStartDate] = useState(new Date());
   return (
     <>
       <div className="dsmeta-card">
         <h2 className="dsmeta-sales-title">Vendas</h2>
         <div>
           <div className="dsmeta-form-control-container">
-            <input
+            <DatePicker
+              selected={new Date()}
+              onChange={(date: Date) => {}}
               className="dsmeta-form-control"
-              type="text"
-              placeholder="inicio"
+              dateFormat="dd/MM/yyyy"
             />
           </div>
           <div className="dsmeta-form-control-container">
-            <input
+            <DatePicker
+              selected={new Date()}
+              onChange={(date: Date) => {}}
               className="dsmeta-form-control"
-              type="text"
-              placeholder="fim"
+              dateFormat="dd/MM/yyyy"
             />
           </div>
         </div>
