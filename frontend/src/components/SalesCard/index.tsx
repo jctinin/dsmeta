@@ -4,7 +4,11 @@ import NotificationButton from "../NotificationButton";
 import "./styles.css";
 
 function SalesCard() {
-  const [startDate, setStartDate] = useState(new Date());
+  const start = new Date(new Date().setDate(new Date().getDate() - 365));
+
+  const [startDate, setStartDate] = useState(start);
+  const [finalDate, setFinalDate] = useState(new Date());
+
   return (
     <>
       <div className="dsmeta-card">
@@ -12,16 +16,20 @@ function SalesCard() {
         <div>
           <div className="dsmeta-form-control-container">
             <DatePicker
-              selected={new Date()}
-              onChange={(date: Date) => {}}
+              selected={startDate}
+              onChange={(date: Date) => {
+                setStartDate(date);
+              }}
               className="dsmeta-form-control"
               dateFormat="dd/MM/yyyy"
             />
           </div>
           <div className="dsmeta-form-control-container">
             <DatePicker
-              selected={new Date()}
-              onChange={(date: Date) => {}}
+              selected={finalDate}
+              onChange={(date: Date) => {
+                setFinalDate(date);
+              }}
               className="dsmeta-form-control"
               dateFormat="dd/MM/yyyy"
             />
