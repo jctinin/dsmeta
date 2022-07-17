@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 import NotificationButton from "../NotificationButton";
 import "./styles.css";
@@ -8,6 +9,12 @@ function SalesCard() {
 
   const [startDate, setStartDate] = useState(start);
   const [finalDate, setFinalDate] = useState(new Date());
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/sales")
+      .then((response) => console.log(response.data));
+  }, []);
 
   return (
     <>
