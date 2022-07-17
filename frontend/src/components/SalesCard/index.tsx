@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
+import { Sale } from "../../models/sale";
+import { BASE_URL } from "../../utils/request";
 import NotificationButton from "../NotificationButton";
 import "./styles.css";
 
@@ -10,10 +12,12 @@ function SalesCard() {
   const [startDate, setStartDate] = useState(start);
   const [finalDate, setFinalDate] = useState(new Date());
 
+  const [sales, setSales] = useState<Sale[]>([]);
+
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/sales")
-      .then((response) => console.log(response.data));
+    axios.get(`${BASE_URL}/sales`).then((response) => {
+      setSales(response.data.content);
+    });
   }, []);
 
   return (
@@ -57,39 +61,23 @@ function SalesCard() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td className="show992">#341</td>
-                <td className="show576">08/07/2022</td>
-                <td>Anakin</td>
-                <td className="show992">15</td>
-                <td className="show992">11</td>
-                <td>R$ 55300.00</td>
-                <td>
-                  <NotificationButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="show992">#341</td>
-                <td className="show576">08/07/2022</td>
-                <td>Anakin</td>
-                <td className="show992">15</td>
-                <td className="show992">11</td>
-                <td>R$ 55300.00</td>
-                <td>
-                  <NotificationButton />
-                </td>
-              </tr>
-              <tr>
-                <td className="show992">#341</td>
-                <td className="show576">08/07/2022</td>
-                <td>Anakin</td>
-                <td className="show992">15</td>
-                <td className="show992">11</td>
-                <td>R$ 55300.00</td>
-                <td>
-                  <NotificationButton />
-                </td>
-              </tr>
+              {sales.map((conteudo) => (
+                <tr key={conteudo.id}>
+                  <td className="show992">{conteudo.id}</td>
+                  <td className="show576">
+                    {new Date(conteudo.date).toLocaleDateString()}
+                  </td>
+
+                  <td>{conteudo.seller_name}</td>
+
+                  <td className="show992">{conteudo.visited}</td>
+                  <td className="show992">{conteudo.deals}</td>
+                  <td>R${conteudo.amount.toFixed(2)}</td>
+                  <td>
+                    <NotificationButton />
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
