@@ -100,15 +100,15 @@
   .dsmeta-sales-table tbody tr {
     font-size: 18px;
     height: 62px;
+  }
 
-}
-
-.show992 {
-  display: none;
-}
-
-@media (min-width: 992px) {
   .show992 {
-    display: table-cell;
+    display: none;
+  }
+
+  @media (min-width: 992px) {
+    .show992 {
+      display: table-cell;
+    }
   }
 }
