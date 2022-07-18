@@ -29,10 +29,6 @@ public class Sale {
 		return id;
 	}
 
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public String getSeller_name() {
 		return seller_name;
 	}
